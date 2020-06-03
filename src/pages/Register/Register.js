@@ -1,16 +1,52 @@
 import React from "react";
+import { auth, createUserProfileDocument } from "../../firebase/firebase.utils";
 
-class Register extends React.Component {
+class RegisterPage extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       email: "",
       password: "",
-      name: "",
+      displayName: "",
+      confirmPassword: "",
     };
   }
 
+  handleSubmitR = async (event) => {
+    event.preventDefault();
+    const { displayName, email, password, confirmPassword } = this.state;
+    if (password !== confirmPassword) {
+      alert("Passwords don't match !!");
+      return;
+    }
+
+    try {
+      const { user } = await auth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
+
+      await createUserProfileDocument(user, { displayName });
+      this.setState({
+        displayName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  handleChange = (event) => {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+  };
+
   render() {
+    const { displayName, email, password, confirmPassword } = this.state;
+
     return (
       <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
         <main className="pa4 black-80">
@@ -24,9 +60,10 @@ class Register extends React.Component {
                 <input
                   className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                   type="text"
-                  name="name"
+                  name="displayName"
                   id="name"
-                  onChange={this.onNameChange}
+                  value={displayName}
+                  onChange={this.handleChange}
                 />
               </div>
               <div className="mt3">
@@ -36,9 +73,10 @@ class Register extends React.Component {
                 <input
                   className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                   type="email"
-                  name="email-address"
+                  name="email"
                   id="email-address"
-                  onChange={this.onEmailChange}
+                  value={email}
+                  onChange={this.handleChange}
                 />
               </div>
               <div className="mv3">
@@ -50,13 +88,27 @@ class Register extends React.Component {
                   type="password"
                   name="password"
                   id="password"
-                  onChange={this.onPasswordChange}
+                  value={password}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="mv3">
+                <label className="db fw6 lh-copy f6" htmlFor="password">
+                  Confirm Password
+                </label>
+                <input
+                  className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                  type="password"
+                  name="confirmPassword"
+                  id="confirmPassword"
+                  value={confirmPassword}
+                  onChange={this.handleChange}
                 />
               </div>
             </fieldset>
             <div className="">
               <input
-                onClick={this.onSubmitSignIn}
+                onClick={this.handleSubmitR}
                 className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
                 type="submit"
                 value="Register"
@@ -69,4 +121,4 @@ class Register extends React.Component {
   }
 }
 
-export default Register;
+export default RegisterPage;

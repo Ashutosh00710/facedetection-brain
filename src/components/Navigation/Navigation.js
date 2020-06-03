@@ -1,22 +1,28 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
+import { auth } from "../../firebase/firebase.utils";
 
-
-const Navigation = ({onRouteChange , isSignedIn}) => {
-		if(isSignedIn)
-		{	return (
-			<nav style={{ display: 'flex', justifyContent: 'flex-end'}}>
-				<p onClick={() => onRouteChange('signout')} className= 'f5 link dim black underline pa2 pointer'>Sign Out</p>
-			</nav>
-			);
-		} else {
-			return (
-			<nav style={{ display: 'flex', justifyContent: 'flex-end'}}>
-				<p onClick={() => onRouteChange('signin')} className= 'f5 link dim black underline pa2 pointer'>Sign In</p>
-				<p onClick={() => onRouteChange('register')} className= 'f5 link dim black underline pa2 pointer'>Register</p>
-			</nav>
-			);
-		}
-	
-}
+const Navigation = ({ currentUser }) => (
+  <div>
+    <nav style={{ display: "flex", justifyContent: "flex-end" }}>
+      {currentUser ? (
+        <div
+          className="f5 link dim black underline pa2 pointer"
+          to="/"
+          onClick={() => auth.signOut()}
+        >
+          Sign Out
+        </div>
+      ) : (
+        <Link
+          to="/register"
+          className="f5 link dim black underline pa2 pointer"
+        >
+          Register
+        </Link>
+      )}
+    </nav>
+  </div>
+);
 
 export default Navigation;
