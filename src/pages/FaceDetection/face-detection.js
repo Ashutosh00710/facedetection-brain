@@ -57,7 +57,7 @@ class FaceDetectionPage extends Component {
   render() {
     return this.props.currentUser ? (
       <div>
-        <Logo />
+        <Logo m="55" ht="150" wi="150" />
         <Rank name={this.props.currentUser.displayName} />
         <ImageLinkForm
           onInputChange={this.onInputChange}

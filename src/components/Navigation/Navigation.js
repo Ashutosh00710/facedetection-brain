@@ -1,6 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { auth } from "../../firebase/firebase.utils";
+import { Link } from "react-router-dom";
 
 const Navigation = ({ currentUser }) => (
   <div>
@@ -8,18 +8,22 @@ const Navigation = ({ currentUser }) => (
       {currentUser ? (
         <div
           className="f5 link dim black underline pa2 pointer"
-          to="/"
           onClick={() => auth.signOut()}
         >
           Sign Out
         </div>
       ) : (
-        <Link
-          to="/register"
-          className="f5 link dim black underline pa2 pointer"
-        >
-          Register
-        </Link>
+        <div>
+          <Link
+            className="f5 link dim black underline pa3 pointer"
+            to="/register"
+          >
+            Register
+          </Link>
+          <Link className="f5 link dim black underline pa3 pointer" to="/">
+            Home
+          </Link>
+        </div>
       )}
     </nav>
   </div>

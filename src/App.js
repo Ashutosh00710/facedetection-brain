@@ -5,6 +5,7 @@ import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import Navigation from "./components/Navigation/Navigation";
 import SignInPage from "./pages/SignIn/SignIn";
 import RegisterPage from "./pages/Register/Register";
+import LandingPage from "./pages/Landing/landing";
 import FaceDetectionPage from "./pages/FaceDetection/face-detection";
 import "./App.css";
 
@@ -63,9 +64,9 @@ class App extends Component {
         <Particles className="particles" params={particlesOptions} />
         <Navigation currentUser={this.state.currentUser} />
         <Switch>
+          <Route exact path="/" component={LandingPage} />
           <Route
-            exact
-            path="/"
+            path="/signin"
             render={() =>
               this.state.currentUser ? (
                 <Redirect to="/detect" />

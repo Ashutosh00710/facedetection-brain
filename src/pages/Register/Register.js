@@ -1,5 +1,6 @@
 import React from "react";
 import { auth, createUserProfileDocument } from "../../firebase/firebase.utils";
+import { Link } from "react-router-dom";
 
 class RegisterPage extends React.Component {
   constructor(props) {
@@ -113,6 +114,11 @@ class RegisterPage extends React.Component {
                 type="submit"
                 value="Register"
               />
+            </div>
+            <div className="lh-copy mt3">
+              <Link to="/" className="f6 link dim black db pointer">
+                Sign In
+              </Link>
             </div>
           </div>
         </main>
