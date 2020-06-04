@@ -9,7 +9,7 @@ const Logo = ({ m, ht, wi }) => {
       <Tilt
         className="Tilt br2 shadow-2"
         options={{ max: Number(m) }} //55
-        style={{ height: Number(ht), width: Number(wi) }} //150
+        style={{ height: `${Number(ht)}`, width: `${Number(wi)}` }} //150
       >
         <div className="Tilt-inner">
           <img alt="logo" src={brain} />
