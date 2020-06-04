@@ -1,9 +1,11 @@
 {
   "name": "facerecog-brain",
-  "homepage": "https://Ashutosh00710.github.io/facedetection-brain",
+  "homepage": "https://ashutosh00710.github.io/facedetection-brain",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "browserslist": "^4.12.0",
+    "caniuse-lite": "^1.0.30001077",
     "clarifai": "^2.9.1",
     "firebase": "^7.14.6",
     "gh-pages": "^3.0.0",
